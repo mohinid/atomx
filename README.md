@@ -25,7 +25,7 @@ status (string)
 created_at and updated_at (Rails timestamps)
 
 ### Features
-Transaction Record Management: Store and retrieve transaction records.
+Transaction Record Management: Retrieve transaction records with pagination and filtering by date and/or type. You can download the filtered/unfiltered report from Transactions list page or by accessing the reports.xlsx endpoint.
 
 Excel Report Generation: Download a report with two sheets:
 
@@ -33,31 +33,12 @@ Summary: Aggregated data (e.g., totals, counts by type/status)
 
 Dump: Complete list of transactions
 
-API for Transaction Listing: List transactions with pagination and filtering by date and/or type.
+### Endpoints
+List transactions UI: GET /transactions
 
-API Endpoints
-Endpoint	Method	Description
-/transactions	GET	List transactions (paginated, filter by date and/or type) & Directly click on Download Report Button.
-/transactions/report	GET	Download Excel report (summary and dump sheets) 
+List transaction JSON: GET /transactions.json
 
-### How to Use
-Clone the repository.
-
-Set up the database:
-
-Configure config/database.yml for MySQL.
-
-Run rails db:create and rails db:migrate.
-
-Seed data (optional): Use rails db:seed
-
-Start the server: rails server
-
-### Access APIs:
-
-List transactions: GET /transactions
-
-Download report: GET /transactions/report
+Download report: GET /transactions/report.xlsx
 
 ### Dependencies
 Ruby on Rails, MySQL, Excel report generation gem (axlsx)
