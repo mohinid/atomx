@@ -4,6 +4,6 @@ test:
   pool: 5
   database: test_db
   username: root
-  password: password
+  password: root
   host: 127.0.0.1
   port: 3306
