@@ -3,6 +3,8 @@
 ### Overview
 This Rails application maintains a database of transaction histories and provides option to generate Excel reports and list transactions with pagination and filtering.
 
+![Alt text for image](/atomx/lib/assets/atomx.png)
+
 ### Database
 Database Engine: MySQL
 
