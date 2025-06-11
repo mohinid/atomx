@@ -1,0 +1,122 @@
+<style>
+  .filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    align-items: end;
+  }
+  .filter-form div {
+    display: flex;
+    flex-direction: column;
+    min-width: 160px;
+  }
+  .filter-form label {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  .filter-form button, .filter-form input[type="submit"] {
+    margin-top: 0.5em;
+    padding: 0.5em 1em;
+    border: none;
+    background: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .filter-form .reset-btn {
+    background: #dee2e6;
+    text-align: center;
+  }
+  table.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    margin-bottom: 1.5rem;
+  }
+  table.transactions-table th, table.transactions-table td {
+    border: 1px solid #dee2e6;
+    padding: 0.75em;
+    text-align: left;
+  }
+  table.transactions-table th {
+    background: #f1f3f5;
+    font-weight: bold;
+  }
+  table.transactions-table tr:nth-child(even) {
+    background: #f8f9fa;
+  }
+  table.transactions-table tr:hover {
+    background: #e9ecef;
+  }
+</style>
+
+<%= form_with url: transactions_path, method: :get, local: true, html: { class: "filter-form" } do |f| %>
+  <div>
+    <%= f.label :type, "Transaction Type" %>
+    <%= f.select :type, options_for_select([['All', ''], ['Credit', 'credit'], ['Debit', 'debit']], params[:type]), include_blank: false, class: "form-select" %>
+  </div>
+  <div>
+    <%= f.label :status, "Status" %>
+    <%= f.select :status, options_for_select([['All', ''], ['Pending', 'pending'], ['Completed', 'completed'], ['Failed', 'failed']], params[:status]), include_blank: false, class: "form-select" %>
+  </div>
+  <div>
+    <%= f.label :date_from, "From Date" %>
+    <%= f.date_field :date_from, value: params[:date_from], class: "form-control" %>
+  </div>
+  <div>
+    <%= f.label :date_to, "To Date" %>
+    <%= f.date_field :date_to, value: params[:date_to], class: "form-control" %>
+  </div>
+  <div>
+    <%= f.submit "Filter", class: "btn btn-primary" %>
+    <%= link_to "Reset", transactions_path, class: "reset-btn btn" %>
+  </div>
+<% end %>
+
+<%= link_to "Download Excel Report", 
+      report_transactions_path(
+        type: params[:type], 
+        status: params[:status], 
+        date_from: params[:date_from], 
+        date_to: params[:date_to], 
+        format: :xlsx
+      ), 
+      class: "btn btn-success", 
+      target: "_blank", 
+      rel: "noopener", 
+      data: { turbo: false } %>
+
+<table class="transactions-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Type</th>
+      <th>Invoice</th>
+      <th>Timestamp</th>
+      <th>Mobile</th>
+      <th>Status</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @transactions.each do |t| %>
+      <tr>
+        <td><%= t.id %></td>
+        <td><%= t.type %></td>
+        <td><%= t.invoice %></td>
+        <td><%= t.timestamp %></td>
+        <td><%= t.mobile %></td>
+        <td><%= t.status %></td>
+        <td><%= t.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td><%= t.updated_at.strftime("%Y-%m-%d %H:%M") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @transactions %>

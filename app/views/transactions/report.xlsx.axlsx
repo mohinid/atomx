@@ -1,0 +1,28 @@
+wb = xlsx_package.workbook
+
+# Summary Sheet
+wb.add_worksheet(name: "Summary") do |sheet|
+  sheet.add_row ["Total count", summary[:total_count]]
+  sheet.add_row ["Total credit", summary[:total_credit]]
+  sheet.add_row ["Total debit", summary[:total_debit]]
+end
+
+# Dump Sheet with column headers
+wb.add_worksheet(name: "Dump") do |sheet|
+  # Define your column names here
+  column_names = ["ID", "Type", "Invoice", "Timestamp", "Mobile", "Status", "Created At", "Updated At"]
+  sheet.add_row column_names
+
+  transactions.each do |t|
+    sheet.add_row [
+      t.id,
+      t.type,
+      t.invoice,
+      t.timestamp,
+      t.mobile,
+      t.status,
+      t.created_at,
+      t.updated_at
+    ]
+  end
+end

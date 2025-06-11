@@ -1,0 +1,26 @@
+default: &default
+  adapter: mysql2
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+development:
+  <<: *default
+  encoding: utf8mb4
+  database: atomx_development
+  username: root
+  password: root
+  host: localhost
+
+test:
+  <<: *default
+  database: atomx_test
+  username: root
+  password: root
+  host: localhost
+
+production:
+  <<: *default
+  database: atomx_production
+  username: root
+  password: root
+  host: localhost
