@@ -60,15 +60,4 @@ List transactions: GET /transactions
 Download report: GET /transactions/report
 
 ### Dependencies
-Ruby on Rails
-
-MySQL (or MongoDB if configured)
-
-Excel report generation gem (e.g., axlsx or xlsx_writer)
-
-### Notes
-Invoice numbers must be unique and exactly 8 digits.
-
-Filtering by date uses the Unix timestamp; conversion may be required in the API.
-
-Excel report generation should use a library compatible with Rails.
+Ruby on Rails, MySQL, Excel report generation gem (axlsx)
