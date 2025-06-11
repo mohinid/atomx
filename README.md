@@ -39,6 +39,3 @@ List transactions UI: GET /transactions
 List transaction JSON: GET /transactions.json
 
 Download report: GET /transactions/report.xlsx
-
-### Dependencies
-Ruby on Rails, MySQL, Excel report generation gem (axlsx)
