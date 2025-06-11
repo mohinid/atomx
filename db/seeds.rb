@@ -12,58 +12,27 @@
 
 # db/seeds.rb
 
+# db/seeds.rb
+
+# Clear existing data (idempotent)
 Transaction.delete_all
 
-sample_transactions = [
-  {
-    type: 'credit',
-    invoice: '10000001',
-    timestamp: 1717802400, # Example UNIX timestamp (2025-06-08 10:00:00 UTC)
-    mobile: '9876543210',
-    status: 'completed',
-    created_at: '2025-06-08 10:00:00',
-    updated_at: '2025-06-08 10:00:00'
-  },
-  {
-    type: 'debit',
-    invoice: '10000002',
-    timestamp: 1717888800, # 2025-06-09 10:00:00 UTC
-    mobile: '9876543211',
-    status: 'pending',
-    created_at: '2025-06-09 10:00:00',
-    updated_at: '2025-06-09 10:00:00'
-  },
-  {
-    type: 'credit',
-    invoice: '10000003',
-    timestamp: 1717975200, # 2025-06-10 10:00:00 UTC
-    mobile: '9876543212',
-    status: 'failed',
-    created_at: '2025-06-10 10:00:00',
-    updated_at: '2025-06-10 10:00:00'
-  },
-  {
-    type: 'debit',
-    invoice: '10000004',
-    timestamp: 1718061600, # 2025-06-11 10:00:00 UTC
-    mobile: '9876543213',
-    status: 'completed',
-    created_at: '2025-06-11 10:00:00',
-    updated_at: '2025-06-11 10:00:00'
-  },
-  {
-    type: 'credit',
-    invoice: '10000005',
-    timestamp: 1718148000, # 2025-06-12 10:00:00 UTC
-    mobile: '9876543214',
-    status: 'pending',
-    created_at: '2025-06-12 10:00:00',
-    updated_at: '2025-06-12 10:00:00'
-  }
-]
+# Generate 100 unique transactions
+(1..100).each do |i|
+  invoice = format("%08d", 10000000 + i)
+  timestamp = Time.now.to_i - (rand(90) * 86400) # Random day within last 90 days
+  status = ['completed', 'pending', 'failed'].sample
+  type = ['credit', 'debit'].sample
+  mobile = "+91#{rand(9000000000..9999999999)}"
 
-sample_transactions.each do |attrs|
-  Transaction.create!(attrs)
+  Transaction.create!(
+    type: type,
+    invoice: invoice,
+    timestamp: timestamp,
+    mobile: mobile,
+    status: status
+    # created_at and updated_at will be set automatically unless you need to override
+  )
 end
 
 puts "Seeded #{Transaction.count} transactions."

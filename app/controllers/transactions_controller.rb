@@ -17,7 +17,7 @@ class TransactionsController < ApplicationController
       transactions = transactions.where('created_at <= ?', to)
     end
   
-    @transactions = transactions.page(params[:page]).per(params[:per_page] || 20)
+    @transactions = transactions.page(params[:page]).per(params[:per_page] || 10)
   
     respond_to do |format|
       format.html # renders index.html.erb
