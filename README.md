@@ -40,3 +40,5 @@ Excel Report Generation: Download a report with two sheets:
 Summary: Aggregated data (e.g., totals, counts by type/status)
 
 Dump: Complete list of transactions
+
+### Testing done via RSpecs
