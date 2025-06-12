@@ -4,7 +4,8 @@ class TransactionsController < ApplicationController
   def index
     transactions = Transaction.all
     transactions = transactions.where(type: params[:type]) if params[:type].present?
-  
+    transactions = transactions.where(status: params[:status]) if params[:status].present?
+    
     if params[:date_from].present? && params[:date_to].present?
       from = Date.parse(params[:date_from]).beginning_of_day
       to = Date.parse(params[:date_to]).end_of_day
