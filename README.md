@@ -6,7 +6,7 @@ This Rails application maintains a database of transaction histories and provide
 ![Transaction report](lib/assets/atomx.png)
 
 ## Endpoints (HOSTED ON AWS- Ubuntu t3.micro free tier)
-List transactions UI: GET http://56.228.29.49:3000//transactions
+List transactions UI: GET http://56.228.29.49:3000/transactions
 
 List transaction JSON: GET http://56.228.29.49:3000/transactions.json (NOTE: Please try in incognito for json url as SSL is not implemented.)
 
