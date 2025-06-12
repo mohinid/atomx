@@ -78,9 +78,6 @@ GEM
       mutex_m
       securerandom (>= 0.3)
       tzinfo (~> 2.0)
-    axlsx_rails (0.6.1)
-      actionpack (>= 3.1)
-      caxlsx (>= 3.0)
     base64 (0.3.0)
     benchmark (0.4.1)
     bigdecimal (3.2.2)
@@ -284,7 +281,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  axlsx_rails
   bootsnap
   caxlsx_rails
   debug

@@ -27,8 +27,6 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # for Excel export
-gem 'axlsx_rails'
-
 gem 'caxlsx_rails'
 
 # for pagination
