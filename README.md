@@ -5,7 +5,15 @@ This Rails application maintains a database of transaction histories and provide
 
 ![Transaction report](lib/assets/atomx.png)
 
-### Database
+## Endpoints (HOSTED ON AWS- Ubuntu t3.micro free tier)
+List transactions UI: GET http://56.228.29.49:3000//transactions
+
+List transaction JSON: GET http://56.228.29.49:3000/transactions.json (NOTE: Please try in incognito for json url as SSL is not implemented.)
+
+Download report: GET http://56.228.29.49:3000/transactions/report.xlsx
+
+
+### Database Fields
 Database Engine: MySQL
 
 Fields:
@@ -32,10 +40,3 @@ Excel Report Generation: Download a report with two sheets:
 Summary: Aggregated data (e.g., totals, counts by type/status)
 
 Dump: Complete list of transactions
-
-### Endpoints
-List transactions UI: GET /transactions
-
-List transaction JSON: GET /transactions.json
-
-Download report: GET /transactions/report.xlsx
