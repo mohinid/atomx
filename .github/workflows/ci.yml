@@ -14,7 +14,7 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: Root@123
+          MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: test_db
         ports: ['3306:3306']
         options: >-
@@ -27,27 +27,21 @@ jobs:
       RAILS_ENV: test
       MYSQL_HOST: 127.0.0.1
       MYSQL_USER: root
-      MYSQL_PASSWORD: Root@123
+      MYSQL_PASSWORD: root
       MYSQL_DB: test_db
 
     steps:
       - uses: actions/checkout@v4
-
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1.0
-          bundler-cache: true
-
-      - name: Install MySQL client
-        run: sudo apt-get update && sudo apt-get install -y default-mysql-client libmysqlclient-dev
-
-      - name: Set up database config
-        run: cp config/database.yml.github-actions config/database.yml
-
-      - name: Create and load test DB
+      - name: Install dependencies
         run: |
-          bundle exec rails db:create
-          bundle exec rails db:schema:load
-
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+      - name: Set up database
+        run: |
+          cp config/database.yml.github-actions config/database.yml
+          bundle exec rails db:create db:schema:load
       - name: Run tests
         run: bundle exec rspec
