@@ -8,14 +8,14 @@ development:
   encoding: utf8mb4
   database: atomx_development
   username: root
-  password: root
+  password: Root@123
   host: localhost
 
 test:
   <<: *default
   database: atomx_test
   username: root
-  password: root
+  password: Root@123
   host: localhost
 
 production:
