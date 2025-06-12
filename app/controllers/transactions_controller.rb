@@ -33,7 +33,7 @@ class TransactionsController < ApplicationController
     end
   end  
 
-  # GET /transactions/report
+  # GET /transactions/report.xlsx
   def report
     transactions = Transaction.all
     transactions = transactions.where(type: params[:type]) if params[:type].present?
